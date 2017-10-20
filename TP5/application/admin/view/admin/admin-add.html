@@ -1,0 +1,138 @@
+{include file='common/header' /}
+    <body>
+        <div class="x-body">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label for="username" class="layui-form-label">
+                        <span class="x-red">*</span>登录名
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="username" name="name" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>将会成为您唯一的登入名
+                    </div>
+                    <div class="layui-form-mid layui-word-aux" id="error" style="display: none;">
+                        <span class="x-red">*</span><span style="color:red;">用户名已被注册</span>
+                    </div>
+                    <div class="layui-form-mid layui-word-aux" id="success" style="display: none;">
+                        <span class="x-red">*</span><span style="color:#0f0;">用户名可用</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="phone" class="layui-form-label">
+                        <span class="x-red">*</span>手机
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="phone" name="mobile" required="" lay-verify="phone"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>将会成为您唯一的登入名
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>邮箱
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_email" name="email" required="" lay-verify="email"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_pass" class="layui-form-label">
+                        <span class="x-red">*</span>密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        6到16个字符
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>确认密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
+                        autocomplete="off" class="layui-input">
+                        <div class="layui-form-mid layui-word-aux">
+                            <div id="E_repass" style="display: none;color: #f00;">
+                            <span class="x-red">*</span><span>密码不一致</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <input type="submit" name="" id="submit" class="layui-btn" value="增加">
+                </div>
+            </form>
+        </div>
+        {include file="common/jquery" /}
+        <!-- 验证用户名是否重复 -->
+        <script type="text/javascript">
+             $("#username").on('blur',function(events){
+               name = $(this).val();
+               if(name!=""){
+                    $.ajax({
+                        type:'post',
+                        url:"{:url('admin/checkUserName')}",
+                        data:{name:name},
+                        dataType:'json',
+                        success:function(data) {
+                            if (data.status==0) {
+                                $("#error").show();
+                                $("#success").hide();
+                                i=1;    //只要有一个不符合就不能提交
+                            }else{
+                                $("#error").hide();
+                                $("#success").show();
+                                i=0;
+                            }
+                        }
+                    });
+                   }
+             });
+             // 验证两次输入的密码
+             $("#L_repass").on('blur',function(events){
+                pass = $("#L_pass").val();
+                if(pass!=$(this).val()){
+                    $("#E_repass").show();
+                    j=1;            //只要有一个不符合就不能提交
+                }else{
+                    $("#E_repass").hide();
+                    j=0;
+                }
+            });
+            $("#submit").on('click',function(events){
+                if(i+j){
+                    return false;       //有字段不符合要求
+                }else{
+                    $.ajax({
+                       type:'post',
+                       url:"{:url('admin/addUser')}",
+                       data:$("form").serialize(),
+                       dataType: 'json',
+                       success:function(data){
+                        if(status==1){
+                            alert(data.msg);
+                            window.location.href="{:url('admin/adminList')}";
+                        }else{
+                            alert(data.msg);
+                        }
+                       }
+                    });
+                }
+            });
+        </script>
+    </body>
+
+</html>

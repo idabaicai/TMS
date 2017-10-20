@@ -1,0 +1,127 @@
+{include file='common/header' /}
+    <body>
+        <div class="x-body">
+            <blockquote class="layui-elem-quote">
+                欢迎登录后台!
+            </blockquote>
+            <p>登录次数：{$data->login_count} </p>
+            <p>登录IP：{$Request.ip}  登录时间： {$data->login_time|date='Y-m-d H:i:s',###}</p>
+            <fieldset class="layui-elem-field layui-field-title site-title">
+              <legend><a name="default" href="">信息统计</a></legend>
+            </fieldset>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>统计</th>
+                        <th>资讯库</th>
+                        <th>图片库</th>
+                        <th>产品库</th>
+                        <th>用户</th>
+                        <th>管理员</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>总数</td>
+                        <td>92</td>
+                        <td>9</td>
+                        <td>0</td>
+                        <td>8</td>
+                        <td>{$count}</td>
+                    </tr>
+                    <tr>
+                        <td>今日</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{$todaynum}</td>
+                    </tr>
+                    <tr>
+                        <td>本周</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{$weeknum}</td>
+                    </tr>
+                    <tr>
+                        <td>本月</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{$mouthnum}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th colspan="2" scope="col">服务器信息</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>当前系统用户名 </td>
+                        <td>{$Think.session.user_info.name}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">服务器计算机名</th>
+                        <td><span id="lbServerName">{$Request.host}</span></td>
+                    </tr>
+                    <tr>
+                        <td>服务器IP地址</td>
+                        <td>{$Request.ip}</td>
+                    </tr>
+                    <tr>
+                        <td>服务器域名</td>
+                        <td>{$Request.domain}</td>
+                    </tr>
+                    <tr>
+                        <td>服务器端口 </td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>服务器脚本超时时间 </td>
+                        <td>30000秒</td>
+                    </tr>
+                    <tr>
+                        <td>PHP版本</td>
+                        <td>{$Think.const.PHP_VERSION}</td>
+                    </tr>
+                    <tr>
+                        <td>当前请求URL</td>
+                        <td>{$Request.url.true}</td>
+                    </tr>
+                    <tr>
+                        <td>服务器当前时间 </td>
+                        <td>{:date('Y-m-d H:i:s')}</td>
+                    </tr>
+                    <tr>
+                        <td>当前Session数量 </td>
+                        <td id="time">{:count($_SESSION)}</td>
+                    </tr>
+                    <tr>
+                        <td>当前SessionID </td>
+                        <td>{:session('user_id')}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="layui-footer footer footer-demo">
+            <div class="layui-main">
+                <p>
+                    <a href="javascript:;" target="_blank">
+                        本后台系统由X前端框架提供前端技术支持
+                    </a>
+                </p>
+            </div>
+        </div>
+        {include file='common/js'}
+        <script type="text/javascript">
+            
+        </script>
+    </body>
+</html>

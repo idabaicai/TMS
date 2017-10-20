@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>TMS教学系统</title>
+	<style type="text/css">
+	</style>
+	{block name="header"}{/block}
+	<link rel="stylesheet" type="text/css" href="__LAYUI__/css/layui.css">
+</head>
+<body>
+	<!-- 导航开始 -->
+	<div class="header">
+	<ul class="layui-nav">
+		<li class="layui-nav-item layui-this"><a href="">首页</a></li>
+		<li class="layui-nav-item"><a href="">课程<span class="layui-badge-dot"></span></a></li>
+		<li class="layui-nav-item"><a href="javascript:;">资料</a>
+		<dl class="layui-nav-child">
+			<dd><a href="">数据结构</a></dd>
+			<dd><a href="">地理数据</a></dd>
+			<dd><a href="">ArcGIS制图</a></dd>
+		</dl>
+		</li>
+		<li class="layui-nav-item"><a href="">选课</a></li>
+			{if condition="!empty($Think.session.user_sinfo)"}
+			<div class="layui-inline" style="float: right;margin-right: 20px;">
+				<li class="layui-nav-item">
+		   	<a href=""><i class="layui-icon">&#xe63a;<span class="layui-badge">3</span></i></a>
+		   </li>
+			<li class="layui-nav-item"><a href="">我</a>
+				<dd class="layui-nav-child">
+					<dl><a href="">基本信息</a></dl>
+					<dl><a href="">足迹</a></dl>
+					<dl><a href="{:url('index/logout')}">退出</a></dl>
+				</dd>
+		   </li>
+			</div>
+			{else /}
+			<div class="layui-inline" style="float: right;margin: 0 auto;">
+				<li class="layui-nav-item">
+					<a href="javascript:;" onclick="register('注册','{:url('index/register')}',550,450)">注册</a>
+			   </li>
+			   <li class="layui-nav-item">
+			   	<a href="{:url('index/login')}">登录</a>
+			   </li>
+			</div>
+			{/if}
+	</ul>
+</div>
+	<!-- 导航结束 -->	
+{block name="body"}{/block}
+	<!-- 底部开始 -->
+	<div class="footer">
+		<div class="layui-bg-cyan">
+		   <div class="layui-container">
+		   	 <div class="layui-row">
+		   	 	<!-- 友情链接begin-->
+		   	 	<div class="friends-link">
+		   	 		<div class="layui-col-md6 layui-col-md-offset3">
+		   	 		<ul>
+		   	 			<li><a href="##">友情链接</a></li>
+		   	 			<li><a href="www.php.cn">PHP中文网</a></li>
+		   	 			<li><a href="www.imooc.com">慕课网</a></li>
+		   	 			<li><a href="www.yzmedu.com">云之梦</a></li>
+		   	 			<li><a href="##">虚位以待</a></li>
+		   	 		</ul>
+		   	 	</div>
+		   	 	<div class="layui-col-md6">		   	 		
+		   	 	</div>
+		   	 	</div>
+		   	 	<!-- 友情链接end-->
+		   	 </div>
+		   </div>
+	    </div>
+	</div>
+	<!-- 底部结束 -->
+	<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+	<script type="text/javascript" src="__LAYUI__/tms.js"></script>
+{block name="footer"}{/block}
+</body>
+</html>

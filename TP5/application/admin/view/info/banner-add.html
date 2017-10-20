@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+           admin
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="__LAYUI__/css/layui.css" media="all">
+    </head>
+    <body>
+        <div class="x-body">
+            <form class="layui-form" enctype="multipart/form-data" action="{:url('info/addImage')}" method="post">
+                <div class="layui-form-item">
+                    <label for="url" class="layui-form-label">
+                        <span class="x-red">*</span>链接
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="url" class="layui-input" required="">
+                    </div>
+                </div>             
+                <div class="layui-form-item">
+                    <label for="desc" class="layui-form-label">
+                        <span class="x-red">*</span>描述
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="desc" name="desc" required="" lay-verify="required"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="link" class="layui-form-label">
+                        <span class="x-red">*</span>轮播图
+                    </label>
+                    <div class="layui-input-inline">
+                      <input type="file" name="image" id="select" value="选择图片">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <input type="submit" class="layui-btn" name="" value="上传" id="submit">
+                </div>
+            </form>
+        </div>
+    <script type="text/javascript" src="__LAYUI__/layui.js"></script>   
+<!--     <script type="text/javascript">
+        layui.use(['form','layer','upload'], function(){
+               var form = layui.form,
+                   layer = layui.layer,
+                   upload = layui.upload;
+                   //执行实例
+                   var uploadInst = upload.render({
+                    elem:'#select',
+                    url:'{:url('info/addImage')}',
+                    auto:false,
+                    bindAction:'#submit',
+                    done:function(res){
+                        if(res[0]==1){
+                            layer.msg(res[1]);
+                        }else{
+                            layer.msg(res[1]);
+                        }
+                    }
+                   });
+              });
+    </script> -->
+    </body>
+
+</html>

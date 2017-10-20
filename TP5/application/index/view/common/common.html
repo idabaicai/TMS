@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>TMS教学系统</title>
+	<style type="text/css">
+	</style>
+	{block name="header"}{/block}
+	<link rel="stylesheet" type="text/css" href="__LAYUI__/css/layui.css">
+</head>
+<body>
+{block name="body"}{/block}
+	<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+	<script type="text/javascript" src="__LAYUI__/tms.js"></script>
+	<script type="text/javascript">
+		layui.use(['element','form'],function(){
+			var element = layui.element,
+				form = layui.form;
+		});
+	</script>
+{block name="footer"}{/block}
+</body>
+</html>

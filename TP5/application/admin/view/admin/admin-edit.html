@@ -1,0 +1,107 @@
+{include file='common/header' /}
+    <body>
+        <div class="x-body">
+            <form class="layui-form" action="{:url('admin/editUser')}">
+                <div class="layui-form-item">
+                    <label for="username" class="layui-form-label">
+                        <span class="x-red">*</span>登录名
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="username" name="name" value="{$user_info.name}" required="" lay-verify="required"
+                        autocomplete="off" class="layui-input" readonly="">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>2到12个字符
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="phone" class="layui-form-label">
+                        <span class="x-red">*</span>手机
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="phone" name="mobile" required="" lay-verify="phone"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>将会成为您唯一的登入名
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_email" class="layui-form-label">
+                        <span class="x-red">*</span>邮箱
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="email" id="L_email" name="email" required="" lay-verify="email" value="" 
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        <span class="x-red">*</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_pass" class="layui-form-label">
+                        <span class="x-red">*</span>密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
+                        autocomplete="off" class="layui-input" value="">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">
+                        6到16个字符
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                        <span class="x-red">*</span>确认密码
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="L_repass" required="" lay-verify="repass" value="" 
+                        autocomplete="off" class="layui-input"><span style="display: none;color: red;" id="m_repass">两次密码输入不一致</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  type="submit" class="layui-btn" id="submit">
+                        保存
+                    </button>
+                </div>
+            </form>
+        </div>
+        {include file='common/jquery' /}
+        <!-- 表单验证 -->
+        <script>
+           $('.layui-input').data({'s':0});        //为每一个输入框绑一个属性  s=0
+           $('input[name=name]').blur(function(){
+                len = this.value.length;
+                if(len<2||len>12){                  
+                    $(this).data({'s':0});          //0表示不符合规则
+                }else{
+                    $(this).data({'s':1})           //1表示符合
+                }
+           });
+           $('input[name=repassword]').blur(function(){
+                password = $('input[name=password]').val();
+                repassword = this.value;
+                if (password!=repassword) {
+                    $('#m_repass').show();
+                    $(this).data({'s':0});
+                }else{
+                    $('#m_repass').hide();
+                    $(this).data({'s':1})
+                }
+           });
+           $('form').submit(function(){
+                tot = 0;
+                $('.layui-input').each(function(){
+                    tot += $(this).data('s');
+                });
+                if (tot==2) {
+                    alert('success!');
+                    return false;
+                }
+           });
+        </script>
+    </body>
+
+</html>
